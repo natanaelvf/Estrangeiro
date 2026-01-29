@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Written submissions - Somos Todxs Estrangeirxs"
+    />
+    <title>Writing - Somos Todxs Estrangeirxs</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body data-page-type="text">
+    <!-- Mobile Navigation Toggle -->
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+      ☰
+    </button>
+
+    <div class="wrapper">
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <a href="index.html" class="logo">Somos Todxs Estrangeirxs</a>
+          <p class="tagline">We Are All Foreigners</p>
+        </div>
+
+        <nav>
+          <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="videos.html">Videos</a></li>
+            <li><a href="music.html">Music</a></li>
+            <li><a href="pictures.html">Pictures</a></li>
+            <li><a href="text.html">Writing</a></li>
+            <li>
+              <a href="submit.html" class="btn-primary" style="margin-top: 2rem"
+                >Submit Your Story</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <header class="page-header">
+          <h1>Writing</h1>
+          <p>
+            Essays, poetry, and narratives exploring the experience of being
+            foreign
+          </p>
+        </header>
+
+        <section>
+          <div class="filter-bar">
+            <button class="filter-btn active" data-sort="recent">Recent</button>
+            <button class="filter-btn" data-sort="popular">Popular</button>
+          </div>
+
+          <div class="media-grid" id="mediaGrid">
+            <!-- Content loaded by JavaScript -->
+          </div>
+        </section>
+
+        <footer class="footer">
+          <p>
+            Uma iniciativa da Secção de Escrita e Leitura (SESLA) - Associação
+            Académica de Coimbra
+          </p>
+        </footer>
+      </main>
+    </div>
+
+    <script src="sample-data.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

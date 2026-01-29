@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Submit your story - Somos Todxs Estrangeirxs"
+    />
+    <title>Submit - Somos Todxs Estrangeirxs</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .form-container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: var(--spacing-lg);
+        backdrop-filter: blur(10px);
+      }
+
+      .form-info {
+        background: rgba(255, 140, 66, 0.1);
+        border-left: 4px solid var(--primary-orange);
+        padding: var(--spacing-md);
+        margin-bottom: var(--spacing-lg);
+        border-radius: 4px;
+      }
+
+      .form-info h3 {
+        color: var(--primary-orange);
+        margin-bottom: var(--spacing-xs);
+        font-size: 1.1rem;
+      }
+
+      .form-info p {
+        margin-bottom: 0.5rem;
+        font-size: 0.95rem;
+      }
+
+      .form-info ul {
+        margin: var(--spacing-sm) 0;
+        padding-left: var(--spacing-md);
+        color: var(--muted-text);
+      }
+
+      .form-info li {
+        margin-bottom: 0.25rem;
+      }
+
+      .input-hint {
+        font-size: 0.875rem;
+        color: var(--muted-text);
+        margin-top: 0.25rem;
+        font-style: italic;
+      }
+
+      .required {
+        color: var(--secondary-orange);
+      }
+
+      #fileGroup,
+      #linkGroup,
+      #textGroup {
+        transition: opacity var(--transition-fast);
+      }
+    </style>
+  </head>
+  <body data-page-type="submit">
+    <!-- Mobile Navigation Toggle -->
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+      ☰
+    </button>
+
+    <div class="wrapper">
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <a href="index.html" class="logo">Somos Todxs Estrangeirxs</a>
+          <p class="tagline">We Are All Foreigners</p>
+        </div>
+
+        <nav>
+          <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="videos.html">Videos</a></li>
+            <li><a href="music.html">Music</a></li>
+            <li><a href="pictures.html">Pictures</a></li>
+            <li><a href="text.html">Writing</a></li>
+            <li>
+              <a href="submit.html" class="btn-primary" style="margin-top: 2rem"
+                >Submit Your Story</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <header class="page-header">
+          <h1>Share Your Story</h1>
+          <p>
+            Contribute to this collective exploration of what it means to be
+            foreign
+          </p>
+        </header>
+
+        <div class="form-container">
+          <div class="form-info">
+            <h3>📢 Call for Submissions</h3>
+            <p>
+              SESLA convida todxs a partilhar trabalhos que versem sobre o tema
+              "ser estrangeiro" — um sentimento que pode ser expresso através da
+              solidão, estranhamento, inadaptação, ou qualquer forma de
+              sentir-se deslocado.
+            </p>
+            <p><strong>Aceita-se:</strong></p>
+            <ul>
+              <li>Vídeos (YouTube, Vimeo, ou upload direto)</li>
+              <li>
+                Música (Spotify, SoundCloud, YouTube Music, ou upload direto)
+              </li>
+              <li>Imagens/Fotografias (link ou upload direto)</li>
+              <li>Textos (poesia, ensaios, narrativas)</li>
+            </ul>
+            <p style="margin-bottom: 0">
+              Todos podem participar, independentemente de idade, idioma ou
+              nacionalidade.
+            </p>
+          </div>
+
+          <form id="submissionForm">
+            <!-- Media Type -->
+            <div class="form-group">
+              <label for="mediaType" class="form-label"
+                >Type of Submission <span class="required">*</span></label
+              >
+              <select id="mediaType" class="form-select" required>
+                <option value="video">Video</option>
+                <option value="music">Music</option>
+                <option value="picture">Picture/Image</option>
+                <option value="text">Written Text</option>
+              </select>
+            </div>
+
+            <!-- Title -->
+            <div class="form-group">
+              <label for="title" class="form-label"
+                >Title <span class="required">*</span></label
+              >
+              <input
+                type="text"
+                id="title"
+                class="form-input"
+                placeholder="Give your work a title"
+                required
+              />
+            </div>
+
+            <!-- Description -->
+            <div class="form-group">
+              <label for="description" class="form-label"
+                >Description <span class="required">*</span></label
+              >
+              <textarea
+                id="description"
+                class="form-textarea"
+                placeholder="Describe your work and what it means to you..."
+                required
+              ></textarea>
+              <div class="input-hint">
+                Share the context and meaning behind your submission
+              </div>
+            </div>
+
+            <!-- Creator/Author Name -->
+            <div class="form-group">
+              <label for="creator" class="form-label"
+                >Your Name (Optional)</label
+              >
+              <input
+                type="text"
+                id="creator"
+                class="form-input"
+                placeholder="Anonymous, or enter your name"
+              />
+              <div class="input-hint">Leave blank to submit anonymously</div>
+            </div>
+
+            <!-- File Upload (for video, music, picture) -->
+            <div class="form-group" id="fileGroup">
+              <label for="fileInput" class="form-label">Upload File</label>
+              <input
+                type="file"
+                id="fileInput"
+                class="form-input"
+                accept="video/*"
+              />
+              <div class="input-hint">Upload directly from your device</div>
+            </div>
+
+            <!-- External Link (for video, music, picture) -->
+            <div class="form-group" id="linkGroup">
+              <label for="linkInput" class="form-label">Or Paste a Link</label>
+              <input
+                type="url"
+                id="linkInput"
+                class="form-input"
+                placeholder="https://youtube.com/... or https://spotify.com/..."
+              />
+              <div class="input-hint">
+                Supported: YouTube, Vimeo, Spotify, SoundCloud, or direct media
+                links
+              </div>
+            </div>
+
+            <!-- Text Content (for text submissions) -->
+            <div class="form-group" id="textGroup" style="display: none">
+              <label for="textContent" class="form-label"
+                >Your Text <span class="required">*</span></label
+              >
+              <textarea
+                id="textContent"
+                class="form-textarea"
+                placeholder="Write or paste your text here..."
+                style="min-height: 300px"
+              ></textarea>
+              <div class="input-hint">
+                Poetry, essays, narratives, or any written work
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary" style="width: 100%">
+                Submit Your Story
+              </button>
+            </div>
+
+            <p
+              class="text-center text-muted"
+              style="font-size: 0.875rem; margin-top: var(--spacing-md)"
+            >
+              By submitting, you agree to share your work as part of this art
+              installation. All submissions are stored locally in your browser.
+            </p>
+          </form>
+        </div>
+
+        <footer class="footer">
+          <p>
+            Uma iniciativa da Secção de Escrita e Leitura (SESLA) - Associação
+            Académica de Coimbra
+          </p>
+        </footer>
+      </main>
+    </div>
+
+    <script src="sample-data.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
