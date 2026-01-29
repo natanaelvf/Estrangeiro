@@ -116,6 +116,27 @@ function getEmbedCode(url, type) {
   return null;
 }
 
+// ===== MEDIA TYPE ICONS =====
+function getMediaTypeIcon(type) {
+  const icons = {
+    video: "fa-video",
+    music: "fa-music",
+    picture: "fa-image",
+    text: "fa-file-lines",
+  };
+  return icons[type] || "fa-circle";
+}
+
+function getMediaTypePage(type) {
+  const pages = {
+    video: "videos.html",
+    music: "music.html",
+    picture: "pictures.html",
+    text: "text.html",
+  };
+  return pages[type] || "index.html";
+}
+
 // ===== RENDERING =====
 function renderMediaCard(submission, showType = true) {
   const card = document.createElement("article");
@@ -148,8 +169,9 @@ function renderMediaCard(submission, showType = true) {
     }
   }
 
+  const icon = getMediaTypeIcon(submission.type);
   const typeLabel = showType
-    ? `<span class="card-type">${submission.type}</span>`
+    ? `<a href="${getMediaTypePage(submission.type)}" class="card-type"><i class="fa-solid ${icon}"></i>${submission.type}</a>`
     : "";
   const creatorText = submission.creator
     ? `<span class="card-creator">by ${escapeHtml(submission.creator)}</span>`

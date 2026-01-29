@@ -351,15 +351,27 @@ a:hover {
 
 .card-type {
   display: inline-block;
-  padding: 0.25rem 0.75rem;
-  background: var(--primary-orange);
-  color: white;
-  font-size: 0.75rem;
+  color: var(--primary-orange);
+  font-size: 0.875rem;
+  border-bottom: 1px solid var(--primary-orange);
   font-weight: 600;
   text-transform: uppercase;
-  border-radius: 20px;
   margin-bottom: var(--spacing-sm);
   letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+  padding-bottom: 2px;
+}
+
+.card-type:hover {
+  color: var(--secondary-orange);
+  border-bottom-color: var(--secondary-orange);
+}
+
+.card-type i {
+  margin-right: 0.5rem;
+  font-size: 1rem;
 }
 
 .card-title {
@@ -638,4 +650,9 @@ a:hover {
 }
 .mb-3 {
   margin-bottom: var(--spacing-lg);
+}
+
+.btn-white::after {
+  color: white !important;
+  background: var(--primary-orange);
 }
