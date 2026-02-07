@@ -7,30 +7,37 @@ const COMPONENTS = {
     </button>
   `,
 
-  nav: `
-    <!-- Sidebar Navigation -->
-    <aside class="sidebar" id="sidebar">
-      <div class="sidebar-header">
-        <a href="index.html" class="logo">Somos Todxs Estrangeirxs</a>
-        <p class="tagline">We Are All Foreigners</p>
-      </div>
+  nav: function () {
+    const currentPath = window.location.pathname;
+    const isInPagesFolder = currentPath.includes("/pages/");
+    const prefix = isInPagesFolder ? "" : "pages/";
+    const homeLink = isInPagesFolder ? "../index.html" : "index.html";
 
-      <nav>
-        <ul class="nav-menu">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="videos.html">Videos</a></li>
-          <li><a href="music.html">Music</a></li>
-          <li><a href="pictures.html">Pictures</a></li>
-          <li><a href="text.html">Writing</a></li>
-          <li>
-            <a href="submit.html" class="btn-primary" style="margin-top: 2rem"
-              >Submit Your Story</a
-            >
-          </li>
-        </ul>
-      </nav>
-    </aside>
-  `,
+    return `
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <a href="${homeLink}" class="logo">Somos Todxs Estrangeirxs</a>
+          <p class="tagline">We Are All Foreigners</p>
+        </div>
+
+        <nav>
+          <ul class="nav-menu">
+            <li><a href="${homeLink}">Home</a></li>
+            <li><a href="${prefix}videos.html">Videos</a></li>
+            <li><a href="${prefix}music.html">Music</a></li>
+            <li><a href="${prefix}pictures.html">Pictures</a></li>
+            <li><a href="${prefix}text.html">Writing</a></li>
+            <li>
+              <a href="${prefix}submit.html" class="btn-primary" style="margin-top: 2rem"
+                >Submit Your Story</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </aside>
+    `;
+  },
 
   footer: `
     <footer class="footer">
@@ -46,7 +53,9 @@ const COMPONENTS = {
 function loadComponent(elementId, componentKey) {
   const element = document.getElementById(elementId);
   if (element && COMPONENTS[componentKey]) {
-    element.innerHTML = COMPONENTS[componentKey];
+    const component = COMPONENTS[componentKey];
+    element.innerHTML =
+      typeof component === "function" ? component() : component;
   }
 }
 

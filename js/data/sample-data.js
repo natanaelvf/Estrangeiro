@@ -210,17 +210,17 @@ Ser estrangeiro não é apenas cruzar fronteiras geográficas. É viver na front
       description:
         "Uma edição especial do jornal sobre a experiência de ser estrangeiro",
       creator: "SESLA - AAC",
-      content: "assets/jornal/thumbnail.jpg",
+      content: "/assets/jornal/thumbnail.jpg",
       contentType: "file",
       timestamp: Date.now(), // Now
       views: 12,
       // Special field for carousel images
       carouselImages: [
-        "assets/jornal/capa.jpg",
-        "assets/jornal/pagina_1.jpg",
-        "assets/jornal/pagina_2.jpg",
-        "assets/jornal/pagina_3.jpg",
-        "assets/jornal/pagina_4.jpg",
+        "/assets/jornal/capa.jpg",
+        "/assets/jornal/pagina_1.jpg",
+        "/assets/jornal/pagina_2.jpg",
+        "/assets/jornal/pagina_3.jpg",
+        "/assets/jornal/pagina_4.jpg",
       ],
     },
   ];

@@ -1,0 +1,32 @@
+/* CSS Variables */
+:root {
+  /* Orange Color Palette */
+  --primary-orange: #ff8c42;
+  --secondary-orange: #ff6b35;
+  --accent-orange: #f4a259;
+
+  /* Backgrounds */
+  --light-bg: #ffffff;
+  --lighter-bg: #f9f9f9;
+  --card-bg: #ffffff;
+
+  /* Text Colors */
+  --dark-text: #3a3a3a;
+  --muted-text: #7a7a7a;
+
+  /* Borders & Effects */
+  --border-color: rgba(0, 0, 0, 0.1);
+  --shadow-color: rgba(0, 0, 0, 0.08);
+
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 3rem;
+  --spacing-xl: 4rem;
+
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-med: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}
