@@ -202,6 +202,27 @@ Ser estrangeiro não é apenas cruzar fronteiras geográficas. É viver na front
       timestamp: Date.now() - 86400000 * 6, // 6 days ago
       views: 65,
     },
+    // Jornal - Hardcoded post with multiple images (Instagram-style carousel)
+    {
+      id: "jornal-post-1",
+      type: "picture",
+      title: "Estrangeiro - Jornal Literário",
+      description:
+        "Uma edição especial do jornal sobre a experiência de ser estrangeiro",
+      creator: "SESLA - AAC",
+      content: "assets/jornal/thumbnail.jpg",
+      contentType: "file",
+      timestamp: Date.now(), // Now
+      views: 12,
+      // Special field for carousel images
+      carouselImages: [
+        "assets/jornal/capa.jpg",
+        "assets/jornal/pagina_1.jpg",
+        "assets/jornal/pagina_2.jpg",
+        "assets/jornal/pagina_3.jpg",
+        "assets/jornal/pagina_4.jpg",
+      ],
+    },
   ];
 
   // Save to localStorage

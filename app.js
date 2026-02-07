@@ -161,7 +161,13 @@ function renderMediaCard(submission, showType = true) {
   } else {
     // File upload
     if (submission.type === "picture") {
-      mediaContent = `<div class="card-media"><img src="${submission.content}" alt="${escapeHtml(submission.title)}"></div>`;
+      // Check if this is a carousel post
+      const hasCarousel =
+        submission.carouselImages && submission.carouselImages.length > 0;
+      const carouselIndicator = hasCarousel
+        ? '<div class="carousel-indicator"><i class="fa-solid fa-images"></i></div>'
+        : "";
+      mediaContent = `<div class="card-media">${carouselIndicator}<img src="${submission.content}" alt="${escapeHtml(submission.title)}"></div>`;
     } else if (submission.type === "video") {
       mediaContent = `<div class="card-media"><video controls><source src="${submission.content}"></video></div>`;
     } else if (submission.type === "music") {
@@ -197,6 +203,18 @@ function renderMediaCard(submission, showType = true) {
     card.style.cursor = "pointer";
     card.addEventListener("click", () => {
       showTextModal(submission);
+      submissionManager.incrementViews(submission.id);
+      updateViewCount(submission.id);
+    });
+  } else if (
+    submission.type === "picture" &&
+    submission.carouselImages &&
+    submission.carouselImages.length > 0
+  ) {
+    // Handle carousel images (Instagram-style)
+    card.style.cursor = "pointer";
+    card.addEventListener("click", () => {
+      showCarouselModal(submission);
       submissionManager.incrementViews(submission.id);
       updateViewCount(submission.id);
     });
@@ -273,7 +291,6 @@ function createTextModal() {
   modal.innerHTML = `
     <div class="modal-overlay"></div>
     <div class="modal-dialog">
-      <button class="modal-close">&times;</button>
       <h2 class="modal-title"></h2>
       <div class="modal-meta"></div>
       <div class="modal-content-text"></div>
@@ -318,17 +335,6 @@ function createTextModal() {
       z-index: 1;
       margin: var(--spacing-md);
     }
-    .modal-close {
-      position: absolute;
-      top: var(--spacing-md);
-      right: var(--spacing-md);
-      background: transparent;
-      border: none;
-      color: var(--primary-orange);
-      font-size: 2rem;
-      cursor: pointer;
-      line-height: 1;
-    }
     .modal-title {
       margin-bottom: var(--spacing-sm);
       padding-right: var(--spacing-xl);
@@ -348,7 +354,6 @@ function createTextModal() {
   document.head.appendChild(style);
 
   // Close handlers
-  modal.querySelector(".modal-close").addEventListener("click", closeTextModal);
   modal
     .querySelector(".modal-overlay")
     .addEventListener("click", closeTextModal);
@@ -362,6 +367,358 @@ function closeTextModal() {
   if (modal) {
     modal.classList.remove("active");
     document.body.style.overflow = "";
+  }
+}
+
+// ===== CAROUSEL MODAL (Instagram-style) =====
+let currentCarouselIndex = 0;
+let currentCarouselImages = [];
+
+function showCarouselModal(submission) {
+  const modal =
+    document.getElementById("carouselModal") || createCarouselModal();
+
+  currentCarouselImages = submission.carouselImages || [];
+  currentCarouselIndex = 0;
+
+  const title = modal.querySelector(".carousel-modal-title");
+  const meta = modal.querySelector(".carousel-modal-meta");
+
+  title.textContent = submission.title;
+
+  const creatorText = submission.creator ? `by ${submission.creator}` : "";
+  const dateText = new Date(submission.timestamp).toLocaleDateString();
+  meta.innerHTML = `${creatorText} ${creatorText && "•"} ${dateText}`;
+
+  updateCarouselImage();
+  modal.classList.add("active");
+  document.body.style.overflow = "hidden";
+}
+
+function createCarouselModal() {
+  const modal = document.createElement("div");
+  modal.id = "carouselModal";
+  modal.className = "modal carousel-modal";
+  modal.innerHTML = `
+    <div class="modal-overlay"></div>
+    <div class="carousel-modal-dialog">
+      <h2 class="carousel-modal-title"></h2>
+      <div class="carousel-modal-meta"></div>
+      
+      <div class="carousel-container">
+        <button class="carousel-btn carousel-prev" aria-label="Previous image">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        
+        <div class="carousel-image-container">
+          <img src="" alt="Carousel image" class="carousel-image">
+        </div>
+        
+        <button class="carousel-btn carousel-next" aria-label="Next image">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
+      
+      <div class="carousel-indicators"></div>
+    </div>
+  `;
+
+  // Add carousel styles
+  const style = document.createElement("style");
+  style.textContent = `
+    .carousel-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2000;
+    }
+    
+    .carousel-modal.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .carousel-modal .modal-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(5px);
+      z-index: 0;
+    }
+    
+    .carousel-modal-dialog {
+      position: relative;
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: var(--spacing-lg);
+      max-width: 900px;
+      max-height: 90vh;
+      overflow-y: auto;
+      z-index: 1;
+      margin: var(--spacing-md);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    }
+    
+    .carousel-modal-title {
+      margin-bottom: var(--spacing-sm);
+      padding-right: var(--spacing-xl);
+      font-size: 1.5rem;
+    }
+    
+    .carousel-modal-meta {
+      color: var(--muted-text);
+      margin-bottom: var(--spacing-md);
+      padding-bottom: var(--spacing-md);
+      border-bottom: 1px solid var(--border-color);
+      font-size: 0.9rem;
+    }
+    
+    .carousel-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--spacing-sm);
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .carousel-image-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: var(--lighter-bg);
+      border-radius: 8px;
+      overflow: hidden;
+      min-height: 400px;
+      max-height: 450px;
+    }
+    
+    .carousel-image {
+      max-width: 100%;
+      max-height: 450px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 8px;
+      transition: opacity var(--transition-fast);
+    }
+    
+    .carousel-image.loading {
+      opacity: 0.5;
+    }
+    
+    .carousel-btn {
+      background: var(--primary-orange);
+      border: none;
+      color: white;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      flex-shrink: 0;
+    }
+    
+    .carousel-btn:hover {
+      background: var(--secondary-orange);
+      transform: scale(1.1);
+    }
+    
+    .carousel-btn:disabled {
+      background: var(--border-color);
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+    
+    .carousel-btn:disabled:hover {
+      transform: scale(1);
+    }
+    
+    .carousel-indicators {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: var(--spacing-sm) 0;
+    }
+    
+    .carousel-indicator-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--border-color);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+    
+    .carousel-indicator-dot.active {
+      background: var(--primary-orange);
+      width: 24px;
+      border-radius: 4px;
+    }
+    
+    .carousel-indicator-dot:hover {
+      background: var(--accent-orange);
+    }
+    
+    .carousel-indicator {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    
+    @media (max-width: 768px) {
+      .carousel-modal-dialog {
+        padding: var(--spacing-md);
+        margin: var(--spacing-sm);
+      }
+      
+      .carousel-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+      }
+      
+      .carousel-image-container {
+        min-height: 300px;
+        max-height: 400px;
+      }
+      
+      .carousel-image {
+        max-height: 400px;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+
+  // Event listeners
+  const prevBtn = modal.querySelector(".carousel-prev");
+  const nextBtn = modal.querySelector(".carousel-next");
+
+  prevBtn.addEventListener("click", () => navigateCarousel(-1));
+  nextBtn.addEventListener("click", () => navigateCarousel(1));
+
+  // Close handlers
+  modal
+    .querySelector(".modal-overlay")
+    .addEventListener("click", closeCarouselModal);
+
+  // Keyboard navigation
+  document.addEventListener("keydown", handleCarouselKeyboard);
+
+  // Touch/swipe support for mobile
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  const imageContainer = modal.querySelector(".carousel-image-container");
+  imageContainer.addEventListener("touchstart", (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+
+  imageContainer.addEventListener("touchend", (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  });
+
+  function handleSwipe() {
+    const swipeThreshold = 50;
+    if (touchStartX - touchEndX > swipeThreshold) {
+      navigateCarousel(1); // Swipe left - next
+    } else if (touchEndX - touchStartX > swipeThreshold) {
+      navigateCarousel(-1); // Swipe right - prev
+    }
+  }
+
+  document.body.appendChild(modal);
+  return modal;
+}
+
+function navigateCarousel(direction) {
+  currentCarouselIndex += direction;
+
+  // Loop around
+  if (currentCarouselIndex < 0) {
+    currentCarouselIndex = currentCarouselImages.length - 1;
+  } else if (currentCarouselIndex >= currentCarouselImages.length) {
+    currentCarouselIndex = 0;
+  }
+
+  updateCarouselImage();
+}
+
+function updateCarouselImage() {
+  const modal = document.getElementById("carouselModal");
+  if (!modal) return;
+
+  const img = modal.querySelector(".carousel-image");
+  const prevBtn = modal.querySelector(".carousel-prev");
+  const nextBtn = modal.querySelector(".carousel-next");
+  const indicatorsContainer = modal.querySelector(".carousel-indicators");
+
+  // Update image
+  img.classList.add("loading");
+  img.src = currentCarouselImages[currentCarouselIndex];
+  img.onload = () => img.classList.remove("loading");
+
+  // Update buttons (always enabled for looping)
+  prevBtn.disabled = false;
+  nextBtn.disabled = false;
+
+  // Update indicators
+  indicatorsContainer.innerHTML = "";
+  currentCarouselImages.forEach((_, index) => {
+    const dot = document.createElement("div");
+    dot.className = `carousel-indicator-dot ${index === currentCarouselIndex ? "active" : ""}`;
+    dot.addEventListener("click", () => {
+      currentCarouselIndex = index;
+      updateCarouselImage();
+    });
+    indicatorsContainer.appendChild(dot);
+  });
+}
+
+function handleCarouselKeyboard(e) {
+  const modal = document.getElementById("carouselModal");
+  if (!modal || !modal.classList.contains("active")) return;
+
+  if (e.key === "ArrowLeft") {
+    navigateCarousel(-1);
+  } else if (e.key === "ArrowRight") {
+    navigateCarousel(1);
+  } else if (e.key === "Escape") {
+    closeCarouselModal();
+  }
+}
+
+function closeCarouselModal() {
+  const modal = document.getElementById("carouselModal");
+  if (modal) {
+    modal.classList.remove("active");
+    document.body.style.overflow = "";
+    currentCarouselImages = [];
+    currentCarouselIndex = 0;
   }
 }
 
