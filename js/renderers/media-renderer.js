@@ -39,13 +39,7 @@ export function renderMediaCard(submission, showType = true) {
   } else {
     // File upload
     if (submission.type === "picture") {
-      // Check if this is a carousel post
-      const hasCarousel =
-        submission.carouselImages && submission.carouselImages.length > 0;
-      const carouselIndicator = hasCarousel
-        ? '<div class="carousel-indicator"><i class="fa-solid fa-images"></i></div>'
-        : "";
-      mediaContent = `<div class="card-media">${carouselIndicator}<img src="${submission.content}" alt="${escapeHtml(submission.title)}"></div>`;
+      mediaContent = `<div class="card-media"><img src="${submission.content}" alt="${escapeHtml(submission.title)}"></div>`;
     } else if (submission.type === "video") {
       mediaContent = `<div class="card-media"><video controls><source src="${submission.content}"></video></div>`;
     } else if (submission.type === "music") {
@@ -55,7 +49,7 @@ export function renderMediaCard(submission, showType = true) {
 
   const icon = getMediaTypeIcon(submission.type);
   const typeLabel = showType
-    ? `<a href="${getMediaTypePage(submission.type)}" class="card-type"><i class="fa-solid ${icon}"></i>${submission.type}</a>`
+    ? `<a href="${getMediaTypePage(submission.type)}" class="card-type">${submission.type}</a>`
     : "";
   const creatorText = submission.creator
     ? `<span class="card-creator">by ${escapeHtml(submission.creator)}</span>`

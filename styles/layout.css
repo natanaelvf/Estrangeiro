@@ -30,8 +30,32 @@
 
 .sidebar-header {
   margin-bottom: var(--spacing-lg);
-  padding-bottom: var(--spacing-md);
+  padding: var(--spacing-md);
   border-bottom: 2px solid var(--border-color);
+  background-image: url("../assets/banner.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.sidebar-header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.85);
+  z-index: 0;
+}
+
+.sidebar-header .logo,
+.sidebar-header .tagline {
+  position: relative;
+  z-index: 1;
 }
 
 .logo {
@@ -116,12 +140,29 @@
 .main-content {
   flex: 1;
   margin-left: 300px;
-  padding: var(--spacing-lg) var(--spacing-md);
+  padding: 0 var(--spacing-md);
   min-height: 100vh;
+  position: relative;
+}
+
+.main-content::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.95);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.main-content > * {
+  position: relative;
+  z-index: 1;
 }
 
 .page-header {
-  margin-bottom: var(--spacing-lg);
   text-align: center;
   padding: var(--spacing-xl) 0;
 }
@@ -138,9 +179,30 @@
   padding: var(--spacing-xl) 0;
   margin-bottom: var(--spacing-lg);
   position: relative;
+  background-image: url("../assets/banner.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 12px;
+  overflow: hidden;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.92);
+  z-index: 0;
+}
+
+.hero::after {
   content: "";
   position: absolute;
   top: -50%;
@@ -154,11 +216,13 @@
   );
   transform: translateX(-50%);
   pointer-events: none;
-  z-index: -1;
+  z-index: 1;
 }
 
 .hero-title {
-  margin-bottom: var(--spacing-md);
+  margin: var(--spacing-md);
+  position: relative;
+  z-index: 2;
 }
 
 .hero-description {
@@ -166,6 +230,13 @@
   margin: 0 auto var(--spacing-md);
   font-size: 1.2rem;
   line-height: 1.8;
+  position: relative;
+  z-index: 2;
+}
+
+.hero .btn-group {
+  position: relative;
+  z-index: 2;
 }
 
 /* ===== FOOTER ===== */

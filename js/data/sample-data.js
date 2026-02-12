@@ -1,5 +1,11 @@
 // Sample data initialization script
 // This adds placeholder content to demonstrate the website
+//
+// ⚠️ IMPORTANT: After editing this file, you MUST clear localStorage!
+// In browser console (F12): localStorage.clear(); location.reload();
+// OR run the reset-data.js script in the console
+//
+// The init function below only runs if localStorage is empty (line 6-9)
 
 (function initSampleData() {
   // Check if sample data already exists
@@ -69,138 +75,131 @@ Ser estrangeiro não é apenas cruzar fronteiras geográficas. É viver na front
 
     // Video submissions (YouTube links)
     {
-      id: "sample-video-1",
+      id: "chosen-video-1",
       type: "video",
-      title: "Immigration  Stories: Finding Home",
-      description:
-        'A short documentary exploring what "home" means to immigrants',
-      creator: "Documentary Collective",
-      content: "https://www.youtube.com/watch?v=J3Y00YJSKXY",
+      title: "Irish Travellers",
+      description: `Irish Travelers live on the fringes of society and their living conditions are on a downward spiral. 
+        A recent EU study revealed shocking figures: 11% of Irish travellers die by suicide and most die before the age of 65. 
+        No other minority in Europe faces such dire statistics.`,
+      creator: " ARTE.tv",
+      content: "https://www.youtube.com/watch?v=2vKhhqVNd4c",
       contentType: "link",
-      timestamp: Date.now() - 86400000 * 3, // 3 days ago
+      timestamp: new Date(2022, 12, 16).getTime(),
       views: 67,
     },
     {
-      id: "sample-video-2",
+      id: "chosen-video-2",
       type: "video",
-      title: "Between Two Worlds",
-      description: "Visual essay on the immigrant experience",
-      creator: "Ana Rodriguez",
-      content: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      title: "Island of my Dreams",
+      description: `A Documentary about the migration of Azorean and Portuguese people to the United States.`,
+      creator: "Ricardo Rebelo",
+      content: "https://www.youtube.com/watch?v=aZa2LaEIluQ",
       contentType: "link",
-      timestamp: Date.now() - 86400000 * 7, // 7 days ago
-      views: 89,
+      timestamp: new Date(2019, 8, 22).getTime(),
+      views: 67,
     },
     {
-      id: "sample-video-3",
+      id: "chosen-video-3",
       type: "video",
-      title: "Voices of Displacement",
-      description:
-        "Interviews with people who feel like outsiders in their own communities",
-      creator: "Community Media Project",
-      content: "https://www.youtube.com/watch?v=9bZkp7q19f0",
+      title: "Balada de um Batráquio",
+      description: `Simultaneamente estranhos e familiares, distantes e próximos, inquietantes e sedutores, marginais e cosmopolitas, 
+      os ciganos apresentam-se envoltos numa aura de ambiguidade. 
+      Não se pode dizer que sejam invisíveis, pois dificilmente passam despercebidos.`,
+      creator: "Leonor Teles",
+      content:
+        "https://www.youtube.com/watch?v=F5OdsHAX2AQ&list=RDF5OdsHAX2AQ&start_radio=1",
       contentType: "link",
-      timestamp: Date.now() - 86400000 * 4, // 4 days ago
-      views: 53,
+      timestamp: new Date(2016, 5, 20).getTime(),
+      views: 67,
     },
-
     // Music submissions
     {
-      id: "sample-music-1",
+      id: "chosen-music-1",
       type: "music",
-      title: "Saudade",
-      description:
-        "A melancholic composition about longing for a place that no longer exists",
-      creator: "Fado Novo",
-      content: "https://www.youtube.com/watch?v=i7d0Lm_31BE",
+      title: "Belchior - Fotografia 3X4",
+      description: `A minha história é ... talvez
+é talvez igual a tua, jovem que desceu do norte
+que no sul viveu na rua
+e que andou desnorteado, como é comum no seu tempo
+e que ficou desapontado, como é comum no seu tempo
+e que ficou apaixonado e violento como, como você
+Eu sou como você. Eu sou como você.`,
+      creator: "Belchior",
+      content: "https://www.youtube.com/watch?v=5-uOtYPSNBs",
       contentType: "link",
-      timestamp: Date.now() - 86400000 * 6, // 6 days ago
-      views: 34,
+      timestamp: new Date(1976, 5).getTime(),
+      views: 15,
     },
     {
-      id: "sample-music-2",
+      id: "chosen-music-2",
       type: "music",
-      title: "Immigrant Song (Cover)",
-      description:
-        "A reinterpretation from the perspective of modern displacement",
-      creator: "The Wanderers",
-      content: "https://www.youtube.com/watch?v=y8OtzJtp-EM",
+      title: "Raul Seixas - Ouro De Tolo",
+      description: `Eu devia estar contente
+Porque eu tenho um emprego
+Sou o dito cidadão respeitável
+E ganho quatro mil cruzeiros por mês`,
+      creator: "Raul Seixas",
+      content: "https://www.youtube.com/watch?v=7MSCzIxhFKI",
       contentType: "link",
-      timestamp: Date.now() - 86400000 * 8, // 8 days ago
-      views: 76,
+      timestamp: new Date(1973, 6, 21).getTime(),
+      views: 22,
     },
     {
-      id: "sample-music-3",
+      id: "chosen-music-3",
       type: "music",
-      title: "Entre Fronteiras",
-      description: "Original song about living between borders",
-      creator: "Coletivo Musical",
-      content: "https://www.youtube.com/watch?v=kJQP7kiw5Fk",
+      title: "Gilberto Gil - 1975 - Refazenda - 10 Lamento Sertanejo",
+      description: `Por ser de lá do sertão
+Lá do cerrado
+Lá do interior, do mato
+Da caatinga, do roçado
+Eu quase não saio
+Eu quase não tenho amigo
+Eu quase que não consigo
+Ficar na cidade sem viver contrariado`,
+      creator: "Gilberto Gil",
+      content: "https://www.youtube.com/watch?v=O6CQsOI2qMg",
       contentType: "link",
-      timestamp: Date.now() - 86400000 * 2, // 2 days ago
-      views: 45,
+      timestamp: new Date(1975).getTime(),
+      views: 8,
+    },
+    {
+      id: "chosen-music-4",
+      type: "music",
+      title: "Vera Bila, Kale - Pas o panori",
+      description: "Music video by Vera Bila & Kale performing Pas o panori",
+      creator: "Vera Bila, Kale",
+      content: "https://youtu.be/R-L477kx8LA?si=qR7AnBd1SaDFgfsJ",
+      contentType: "link",
+      timestamp: new Date(1998, 2).getTime(),
+      views: 8,
     },
 
     // Picture submissions
     {
-      id: "sample-picture-1",
+      id: "chosen-picture-1",
       type: "picture",
-      title: "Empty Suitcase",
-      description: "A photograph representing the weight of displacement",
-      creator: "Lisa Chen",
-      content:
-        "https://images.unsplash.com/photo-1565026057447-bc90a3dceb87?w=800",
-      contentType: "link",
-      timestamp: Date.now() - 86400000 * 5, // 5 days ago
+      title: "Tod@s somos estrangeir@s em algum lugar",
+      description: `Uma vez li esta frase gravada num muro: 
+“Tod@s somos estrangeir@s em algum lugar”. 
+E é verdade… não absoluta, mas simbólica. 
+`,
+      creator: "Vera Araújo",
+      content: "/assets/images/vera_araujo.png",
+      contentType: "file",
+      timestamp: new Date(2019, 5, 19).getTime(),
       views: 91,
     },
     {
-      id: "sample-picture-2",
+      id: "chosen-picture-2",
       type: "picture",
-      title: "Border Crossing",
-      description: "Abstract representation of crossing invisible boundaries",
-      creator: "Anonymous",
-      content:
-        "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800",
-      contentType: "link",
-      timestamp: Date.now() - 86400000 * 9, // 9 days ago
-      views: 102,
-    },
-    {
-      id: "sample-picture-3",
-      type: "picture",
-      title: "Dual Identity",
-      description: "Portrait exploring fragmented cultural identity",
-      creator: "Marcus Williams",
-      content:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800",
-      contentType: "link",
-      timestamp: Date.now() - 86400000 * 1, // 1 day ago
-      views: 58,
-    },
-    {
-      id: "sample-picture-4",
-      type: "picture",
-      title: "Raízes Deslocadas",
-      description: "Uma árvore sem raízes, simbolizando o desenraizamento",
-      creator: "Pedro Costa",
-      content:
-        "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800",
-      contentType: "link",
-      timestamp: Date.now() - 86400000 * 3, // 3 days ago
-      views: 73,
-    },
-    {
-      id: "sample-picture-5",
-      type: "picture",
-      title: "Windows to Elsewhere",
-      description: "Looking out from a new place, longing for another",
-      creator: "Sarah Ahmed",
-      content:
-        "https://images.unsplash.com/photo-1516541196182-6bdb0516ed27?w=800",
-      contentType: "link",
-      timestamp: Date.now() - 86400000 * 6, // 6 days ago
-      views: 65,
+      title: "Ellis Island in 1907",
+      description:
+        "How the Immigrants Who Came to Ellis Island in 1907 Compare to Arrivals Today",
+      creator: "History",
+      content: "/assets/chosen_image.avif",
+      contentType: "file",
+      timestamp: Date.now() - 86400000 * 5, // 5 days ago
+      views: 91,
     },
     // Jornal - Hardcoded post with multiple images (Instagram-style carousel)
     {

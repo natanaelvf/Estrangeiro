@@ -60,8 +60,13 @@ export function getEmbedCode(url, type) {
     return `<iframe width="100%" height="200" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=${encodeURIComponent(url)}&color=%23ff8c42&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true"></iframe>`;
   }
 
-  // Direct image link
-  if (type === "picture" && url.match(/\.(jpg|jpeg|png|gif|webp)$/i)) {
+  // Direct image link - check for image extensions (with or without query params)
+  if (
+    type === "picture" &&
+    (url.match(/\.(jpg|jpeg|png|gif|webp)(\?.*)?$/i) ||
+      url.includes("unsplash.com") ||
+      url.includes("imgur.com"))
+  ) {
     return `<img src="${url}" alt="Submitted image">`;
   }
 
