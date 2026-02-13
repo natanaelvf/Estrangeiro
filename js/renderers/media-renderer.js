@@ -24,11 +24,21 @@ export function renderMediaCard(submission, showType = true) {
   let mediaContent = "";
 
   if (submission.type === "text") {
-    mediaContent = `
-      <div class="card-text-preview">
-        <p>${escapeHtml(submission.content.substring(0, 200))}${submission.content.length > 200 ? "..." : ""}</p>
-      </div>
-    `;
+    if (submission.contentType === "file") {
+      // File-based text: placeholder filled by async fetch below
+      mediaContent = `
+        <div class="card-text-preview">
+          <p class="text-preview-loading"></p>
+        </div>
+      `;
+    } else {
+      // Inline text content
+      mediaContent = `
+        <div class="card-text-preview">
+          <p>${escapeHtml(submission.content.substring(0, 200))}${submission.content.length > 200 ? "..." : ""}</p>
+        </div>
+      `;
+    }
   } else if (submission.contentType === "link") {
     const embedCode = getEmbedCode(submission.content, submission.type);
     mediaContent = `
@@ -104,6 +114,20 @@ export function renderMediaCard(submission, showType = true) {
       submissionManager.incrementViews(submission.id);
       updateViewCount(submission.id);
     });
+  }
+
+  // Fetch text file preview for file-based text entries
+  if (submission.type === "text" && submission.contentType === "file") {
+    fetch(submission.content)
+      .then((r) => r.text())
+      .then((text) => {
+        const preview = card.querySelector(".card-text-preview p");
+        if (preview) {
+          preview.textContent =
+            text.substring(0, 200) + (text.length > 200 ? "..." : "");
+        }
+      })
+      .catch(() => {});
   }
 
   return card;

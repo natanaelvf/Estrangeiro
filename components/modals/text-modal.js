@@ -2,21 +2,34 @@
 
 import { escapeHtml } from "../../js/utils/helpers.js";
 
-export function showTextModal(submission) {
+export async function showTextModal(submission) {
   const modal = document.getElementById("textModal") || createTextModal();
   const title = modal.querySelector(".modal-title");
   const content = modal.querySelector(".modal-content-text");
   const meta = modal.querySelector(".modal-meta");
 
   title.textContent = submission.title;
-  content.textContent = submission.content;
 
   const creatorText = submission.creator ? `by ${submission.creator}` : "";
   const dateText = new Date(submission.timestamp).toLocaleDateString();
   meta.innerHTML = `${creatorText} ${creatorText && "•"} ${dateText}`;
 
+  // Show modal immediately
   modal.classList.add("active");
   document.body.style.overflow = "hidden";
+
+  // Load content: fetch from file or use inline text
+  if (submission.type === "text" && submission.contentType === "file") {
+    content.textContent = "A carregar...";
+    try {
+      const response = await fetch(submission.content);
+      content.textContent = await response.text();
+    } catch (e) {
+      content.textContent = "Erro ao carregar o texto.";
+    }
+  } else {
+    content.textContent = submission.content;
+  }
 }
 
 function createTextModal() {

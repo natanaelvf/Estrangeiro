@@ -16,61 +16,150 @@
   }
 
   const sampleSubmissions = [
-    // Text submissions
+    // Text submissions (content loaded from .txt files in /assets/texts/)
     {
-      id: "sample-text-1",
+      id: "text-carolina-fidalgo-1",
       type: "text",
-      title: "Invisible Borders",
-      description: "A poem about feeling foreign in your own homeland",
-      creator: "Maria Santos",
-      content: `I walk these streets I've known since birth,
-Yet somehow they don't recognize me back.
-The language sits heavy on my tongue,
-Foreign in a place that should be home.
-
-They look at me and see a stranger,
-Though I've lived here all my life.
-The borders aren't drawn on maps,
-They're etched in sideways glances,
-In questions about where I'm "really" from.
-
-I am foreign not by choice,
-But by the lens through which they see.
-My passport says I belong,
-But their eyes tell a different story.`,
-      contentType: "text",
-      timestamp: Date.now() - 86400000 * 2, // 2 days ago
-      views: 24,
+      title: "Cães Brancos, Cães Pretos",
+      description:
+        "Um conto sobre superstição, medo e a construção de muros invisíveis numa cidade cercada",
+      creator: "Carolina Fidalgo",
+      content: "/assets/texts/carolina_fidalgo/caes_brancos_caes_pretos.txt",
+      contentType: "file",
+      timestamp: new Date(2025, 10, 15).getTime(),
+      views: 34,
     },
     {
-      id: "sample-text-2",
+      id: "text-delano-valentim-1",
       type: "text",
-      title: "The Language of Displacement",
-      description: "An essay on the experience of cultural displacement",
-      creator: "Anonymous",
-      content: `To be foreign is to exist in translation. Every interaction becomes a careful negotiation between who you are and who they expect you to be. You learn to code-switch, not just languages, but entire identities.
-
-You become fluent in the art of explanation, always ready with the story of how you got here, why you speak the way you do, why you celebrate different holidays. Your life becomes a museum exhibit, open for inspection.
-
-But perhaps the cruelest part is when you return "home" and find yourself foreign there too. The accent has shifted, the references don't land, and you realize you've become a bridge between two worlds, fully belonging to neither.`,
-      contentType: "text",
-      timestamp: Date.now() - 86400000 * 5, // 5 days ago
-      views: 42,
+      title: "Dona Tânia",
+      description:
+        "Embora os fatos narrados e os personagens sejam fictícios, esta obra de ficção é inspirada por experiências e observações da infância e adolescência do autor",
+      creator: "Delano Valentim",
+      content: "/assets/texts/delano_valentim/dona_tania.txt",
+      contentType: "file",
+      timestamp: new Date(2025, 9, 20).getTime(),
+      views: 45,
     },
     {
-      id: "sample-text-3",
+      id: "text-delano-valentim-2",
       type: "text",
-      title: "Fragmentos de Identidade",
-      description: "Reflexões sobre identidade fragmentada entre culturas",
-      creator: "João Silva",
-      content: `Sou um mosaico de lugares que nunca foram completamente meus. Cada peça reflete um momento, uma língua, uma versão de mim que existiu em um espaço específico.
-
-Há dias em que acordo e não reconheço minha própria voz no espelho. Ela carrega sotaques de três continentes, memórias de quatro casas, saudades de pessoas que talvez nunca entenderam quem eu realmente sou.
-
-Ser estrangeiro não é apenas cruzar fronteiras geográficas. É viver na fronteira entre identidades, línguas, expectativas. É ser sempre "aquele que veio de fora", mesmo quando não há um "dentro" para chamar de seu.`,
-      contentType: "text",
-      timestamp: Date.now() - 86400000 * 1, // 1 day ago
-      views: 18,
+      title: "Lá",
+      description:
+        "Uma reflexão sobre pertencimento, deslocamento e a busca pelo interior das coisas",
+      creator: "Delano Valentim",
+      content: "/assets/texts/delano_valentim/la.txt",
+      contentType: "file",
+      timestamp: new Date(2025, 11, 5).getTime(),
+      views: 38,
+    },
+    {
+      id: "text-eugenio-luis-1",
+      type: "text",
+      title: "Sinais de fumo",
+      description:
+        "Um poema sobre demónios interiores e a linguagem do medo",
+      creator: "Eugénio Luís",
+      content: "/assets/texts/eugenio_luis/sinais_de_fumo.txt",
+      contentType: "file",
+      timestamp: new Date(2025, 8, 10).getTime(),
+      views: 22,
+    },
+    {
+      id: "text-eugenio-luis-2",
+      type: "text",
+      title: "Eu não sei parar",
+      description:
+        "Um poema sobre o vazio recorrente, a solidão e a incapacidade de parar",
+      creator: "Eugénio Luís",
+      content: "/assets/texts/eugenio_luis/eu_nao_sei_parar.txt",
+      contentType: "file",
+      timestamp: new Date(2025, 8, 12).getTime(),
+      views: 19,
+    },
+    {
+      id: "text-marinah-raposo-1",
+      type: "text",
+      title: "Sou o que sobrou do seu rastro",
+      description:
+        "Um poema sobre colonialismo, identidade fragmentada e a reconstrução da memória",
+      creator: "Marinah Raposo",
+      content: "/assets/texts/marinah_raposo/seu_rastro.txt",
+      contentType: "file",
+      timestamp: new Date(2025, 10, 1).getTime(),
+      views: 41,
+    },
+    {
+      id: "text-natanael-ferreira-1",
+      type: "text",
+      title: "Vida",
+      description:
+        "Um poema sobre a vida que passa como navios e a fragilidade das ligações humanas",
+      creator: "Natanael Ferreira",
+      content: "/assets/texts/natanael_ferreira/vida.txt",
+      contentType: "file",
+      timestamp: new Date(2025, 7, 25).getTime(),
+      views: 28,
+    },
+    {
+      id: "text-natanael-ferreira-2",
+      type: "text",
+      title: "Estrangeiros para sempre",
+      description:
+        "Um poema sobre a condição permanente de ser estrangeiro e a busca por pertencimento",
+      creator: "Natanael Ferreira",
+      content: "/assets/texts/natanael_ferreira/estrangeiros_para_sempre.txt",
+      contentType: "file",
+      timestamp: new Date(2025, 7, 28).getTime(),
+      views: 36,
+    },
+    {
+      id: "text-natanael-ferreira-3",
+      type: "text",
+      title: "Vagamundos",
+      description:
+        "Um poema sobre migração e a eterna busca por um lugar a que chamar casa",
+      creator: "Natanael Ferreira",
+      content: "/assets/texts/natanael_ferreira/vagamundos.txt",
+      contentType: "file",
+      timestamp: new Date(2025, 7, 30).getTime(),
+      views: 31,
+    },
+    {
+      id: "text-neuzi-barbarini-1",
+      type: "text",
+      title: "Ai de ti, estrangeira",
+      description:
+        "Um poema sobre a experiência de ser estrangeira em terras perto do mar que banha as suas outras terras",
+      creator: "Neuzi Barbarini",
+      content: "/assets/texts/neuzi_barbarini/ai_de_ti.txt",
+      contentType: "file",
+      timestamp: new Date(2025, 9, 8).getTime(),
+      views: 27,
+    },
+    {
+      id: "text-vera-araujo-1",
+      type: "text",
+      title: "Tod@s somos estrangeir@s em algum lugar",
+      description:
+        "Uma reflexão sobre estrangeiridade, pertencimento e a liberdade discreta de não pertencer por inteiro",
+      creator: "Vera Araújo",
+      content: "/assets/texts/vera_araujo/estrangeiros_em_algum_lugar.txt",
+      contentType: "file",
+      timestamp: new Date(2025, 10, 20).getTime(),
+      views: 52,
+    },
+    {
+      id: "text-paula-lima-1",
+      type: "text",
+      title: "No centro do mundo não tem lugar",
+      description:
+        "Uma crónica sobre migração, identidade, memória familiar e violência institucional",
+      creator: "Paula Lima",
+      content: "/assets/texts/paula_lima/centro_do_mundo.txt",
+      contentType: "file",
+      timestamp: new Date(2025, 11, 10).getTime(),
+      views: 63,
     },
 
     // Video submissions (YouTube links)
