@@ -45,8 +45,7 @@
       id: "text-delano-valentim-2",
       type: "text",
       title: "Lá",
-      description:
-        "Uma reflexão sobre pertencimento, deslocamento e a busca pelo interior das coisas",
+      description: "Uma história de vida, passada lá, e cá",
       creator: "Delano Valentim",
       content: "/assets/texts/delano_valentim/la.txt",
       contentType: "file",
@@ -57,8 +56,7 @@
       id: "text-eugenio-luis-1",
       type: "text",
       title: "Sinais de fumo",
-      description:
-        "Um poema sobre demónios interiores e a linguagem do medo",
+      description: "Um poema sobre demónios interiores e a linguagem do medo",
       creator: "Eugénio Luís",
       content: "/assets/texts/eugenio_luis/sinais_de_fumo.txt",
       contentType: "file",
