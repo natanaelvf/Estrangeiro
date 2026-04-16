@@ -1,0 +1,214 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #fcf6f5; /* Light beige/pink */
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+  color: #333;
+  position: relative;
+}
+
+/* Background Blobs (Premium Off-Screen Tones) */
+.bg-shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  z-index: 0;
+  opacity: 0.8;
+  transition: transform 10s ease-in-out;
+}
+
+.shape-1 {
+  width: 600px;
+  height: 600px;
+  background-color: #f8dbd8; /* Rosy tone */
+  top: -200px;
+  left: -150px;
+}
+
+.shape-2 {
+  width: 800px;
+  height: 800px;
+  background-color: #f7e2d6; /* Warm sand/peach */
+  bottom: -300px;
+  right: -200px;
+}
+
+.shape-3 {
+  width: 400px;
+  height: 400px;
+  background-color: #f0e1e1; /* Dusky tone */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* ── Subtle Background Bubbles ─────────────────────────────────── */
+#bubbles-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  animation: bubbleFloat linear infinite;
+  will-change: transform;
+}
+
+@keyframes bubbleFloat {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(15px, -20px) scale(1.04);
+  }
+  50% {
+    transform: translate(-10px, -35px) scale(0.97);
+  }
+  75% {
+    transform: translate(20px, -15px) scale(1.02);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+/* Title Overlay */
+.title-overlay {
+  position: absolute;
+  top: 40px;
+  left: 50px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.title-overlay h1 {
+  font-family: 'Cinzel', serif;
+  font-size: 3rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+  letter-spacing: -1px;
+}
+
+.title-overlay p {
+  font-weight: 300;
+  color: #555;
+  font-size: 1.1rem;
+}
+
+/* ── Controls Row ──────────────────────────────────────────────── */
+.controls-row {
+  position: absolute;
+  top: 40px;
+  right: 50px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Shared style for control buttons */
+.control-btn,
+.classic-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 30px;
+  color: #1a1a1a;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.control-btn:hover,
+.classic-toggle:hover {
+  background: rgba(255, 255, 255, 0.8);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Interactive SVG Canvas */
+#mobius-container {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  touch-action: none; 
+}
+
+#mobius-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Text on Path Formatting */
+.mobius-text {
+  font-family: 'Cinzel', serif;
+  font-size: 18px;
+  fill: #2a2a2a;
+  cursor: grab;
+  user-select: none;
+  font-weight: 600;
+}
+
+.mobius-text:active {
+  cursor: grabbing;
+}
+
+/* ── Clickable Title Links on the path ─────────────────────────── */
+.title-link {
+  cursor: pointer;
+  transition: fill 0.2s ease;
+}
+
+.title-link:hover {
+  fill: #8b4513;
+  text-decoration: underline;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .title-overlay {
+    top: 20px;
+    left: 20px;
+  }
+  .title-overlay h1 {
+    font-size: 2rem;
+  }
+  .controls-row {
+    top: auto;
+    bottom: 30px;
+    right: 20px;
+  }
+  .mobius-text {
+    font-size: 14px;
+  }
+}
